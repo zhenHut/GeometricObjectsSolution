@@ -13,30 +13,38 @@ namespace GeometricObjectsSolution
     public class InvalidMeasureEventArgs : EventArgs
     {
         #region Felder
-        private int _InvalidMeasure;
-        private string _PropertyName;
+        private int _invalidMeasure;
+        private string _propertyName;
+        private Exception _error;
         #endregion
 
         #region Eigenschaften
         public int InvalidMeasure
         {
-            get => _InvalidMeasure;
+            get => _invalidMeasure;
         }
 
         public string PropertyName
         {
-            get => _PropertyName;
+            get => _propertyName;
+        }
+
+        public Exception Error
+        {
+            get=>_error;
         }
         #endregion
 
         #region Konstruktor
-        public InvalidMeasureEventArgs(int invalidMeasure, string propertyName)
+        public InvalidMeasureEventArgs(int invalidMeasure, string propertyName, Exception error)
         {
-            _InvalidMeasure = invalidMeasure;
+            _invalidMeasure = invalidMeasure;
+            _error = error;
+
             if (propertyName == "" || propertyName == null)
-                _PropertyName = "[unknown]";
+                _propertyName = "[unknown]";
             else
-                _PropertyName = propertyName;
+                _propertyName = propertyName;
         }
         #endregion
     }

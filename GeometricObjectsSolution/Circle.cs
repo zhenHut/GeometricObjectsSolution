@@ -59,7 +59,12 @@ namespace GeometricObjectsSolution
                     OnPropertyChanged("Radius");
                 }
                 else
-                    OnInvalidMeasure(new InvalidMeasureEventArgs(value, "Radius"));
+                {
+                    InvalidMeasureException ex = new InvalidMeasureException($"Ein Radius von {value} ist nicht zulässig");
+                    ex.Data.Add("Time", DateTime.Now);
+                    OnInvalidMeasure(new InvalidMeasureEventArgs(value, "Radius", ex));
+                
+                }
             }
         }
         #endregion
