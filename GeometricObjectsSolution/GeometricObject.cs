@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace GeometricObjectsSolution
 {
@@ -70,7 +65,17 @@ namespace GeometricObjectsSolution
             OnMoved(new EventArgs());
         }
 
-        protected virtual void OnInvalidMeasure(InvalidMeasureEventArgs e) => InvalidMeasure?.Invoke(this, e);
+        protected virtual void OnInvalidMeasure(InvalidMeasureEventArgs e)
+        {
+            if (InvalidMeasure != null)
+            {
+                InvalidMeasure.Invoke(this, e);
+            }
+            else
+            {
+                throw e.Error;
+            }
+        }
 
         protected virtual void OnMoving(MovingEventArgs e) => Moving?.Invoke(this, e);
 

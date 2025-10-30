@@ -54,7 +54,11 @@
                     OnPropertyChanged("Length");
                 }
                 else
-                    OnInvalidMeasure(new InvalidMeasureEventArgs(value, "Length"));
+                {
+                    InvalidMeasureException exception = new InvalidMeasureException($"Die Länge von {value} ist nicht zulässig");
+                    exception.Data.Add("Time", DateTime.Now);
+                    OnInvalidMeasure(new InvalidMeasureEventArgs(value, "Length", exception));
+                }
             }
         }
 
@@ -70,7 +74,11 @@
                     OnPropertyChanged("Width");
                 }
                 else
-                    OnInvalidMeasure(new InvalidMeasureEventArgs(value, "Width"));
+                {
+                    InvalidMeasureException exception = new InvalidMeasureException($"Die Breite von {value} ist nicht zulässig");
+                    exception.Data.Add("Time", DateTime.Now);
+                    OnInvalidMeasure(new InvalidMeasureEventArgs(value, "Width", exception));
+                }
             }
         }
         #endregion
